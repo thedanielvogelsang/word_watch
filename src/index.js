@@ -17,6 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
   $(buttonName).on('click', function(e){
     e.preventDefault();
     newtext = newtext.value
+    $('textarea').val("")
     WORDHelper.breakDownText(newtext)
   })
 })
