@@ -10327,6 +10327,14 @@ return jQuery;
 /* 1 */
 /***/ (function(module, exports) {
 
+class Word{
+  constructor(wordJson){
+    this.name = Object.keys(wordJson)[0]
+    this.count = Object.values(wordJson)[0]
+  };
+}
+
+module.exports = Word
 
 
 /***/ }),
@@ -10342,9 +10350,8 @@ module.exports = __webpack_require__(6);
 /***/ (function(module, exports, __webpack_require__) {
 
 const $ = __webpack_require__(0)
-const Word = __webpack_require__(4)
-const ajax = __webpack_require__(1)
-const WORDHelper = __webpack_require__(5)
+const Word = __webpack_require__(1)
+const WORDHelper = __webpack_require__(4)
 
 document.addEventListener("DOMContentLoaded", () => {
   $(document).ready(function(){
@@ -10369,29 +10376,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
 /***/ }),
 /* 4 */
-/***/ (function(module, exports) {
-
-class Word{
-  constructor(wordJson){
-    this.name = Object.keys(wordJson)[0]
-    this.count = Object.values(wordJson)[0]
-  };
-}
-
-module.exports = Word
-
-
-/***/ }),
-/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 const $ = __webpack_require__(0)
-const ajax = __webpack_require__(1)
+const ajax = __webpack_require__(5)
 
 class WORDHelper{
   static appendBreakDownText(newText){
     let num = Object.keys(newText).length
     let textKeys = Object.keys(newText)
+    ajax.postWords(newText)
     for(let i = 0; i < num; i++){
       $('.word-count').append(`<p style='font-size:${newText[textKeys[i]]}em'>${textKeys[i]}</p>`)
     }
@@ -10412,6 +10406,20 @@ class WORDHelper{
 }
 
 module.exports = WORDHelper
+
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+const $ = __webpack_require__(0)
+const Word = __webpack_require__(1)
+
+function postWords(wordCount){
+  console.log('hello world')
+}
+
+module.exports = postWords
 
 
 /***/ }),

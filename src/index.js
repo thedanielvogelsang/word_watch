@@ -1,18 +1,11 @@
 const $ = require('jQuery')
 const Word = require('./word.js')
-const ajax = require('./ajaxCalls')
 const WORDHelper = require('./wordHelper')
+const ajax = require('./ajaxCalls')
 
 document.addEventListener("DOMContentLoaded", () => {
   $(document).ready(function(){
-    $.ajax({
-      type: 'get',
-      url: 'http://localhost:3000/api/v1/top_word'
-    })
-    .done(function(data){
-      let word = new Word(data.word);
-      $('.top-word h3').append(word.name + ` (${word.count})`)
-    })
+    return ajax.getMostWord()
   })
   let buttonName = document.getElementsByTagName('button')[0]
   let newtext = document.getElementsByTagName('textarea')[0]

@@ -5,6 +5,7 @@ class WORDHelper{
   static appendBreakDownText(newText){
     let num = Object.keys(newText).length
     let textKeys = Object.keys(newText)
+    ajax.postWords(newText)
     for(let i = 0; i < num; i++){
       $('.word-count').append(`<p style='font-size:${newText[textKeys[i]]}em'>${textKeys[i]}</p>`)
     }
