@@ -8,9 +8,8 @@ document.addEventListener("DOMContentLoaded", () => {
       url: 'http://localhost:3000/api/v1/top_word'
     })
     .done(function(data){
-      word = new Word(data.word)
-      console.log(word)
-      $('.top_word').append('<h3>')
+      let word = new Word(data.word);
+      $('.top-word').append('<h3>' + word.name + ` (${word.count})</h3>`)
     })
   })
 })
