@@ -10401,7 +10401,7 @@ function getMostWord(){
 function postWords(word){
   $.ajax({
     type: 'post',
-    url: 'https://wordwatch-api.herokuapp.com/api/v1/words',
+    url: 'http://localhost:3000/api/v1/words',
     data: word
   })
   .done(function(data){

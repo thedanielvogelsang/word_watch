@@ -5,7 +5,7 @@ const WORD = require('./wordHelper')
 function getMostWord(){
   $.ajax({
     type: 'get',
-    url: 'http://localhost:3000/api/v1/top_word'
+    url: 'https://wordwatch-api.herokuapp.com/api/v1/top_word'
   })
   .done(function(data){
     let word = new Word(data.word);
@@ -19,7 +19,7 @@ function getMostWord(){
 function postWords(word){
   $.ajax({
     type: 'post',
-    url: 'http://localhost:3000/api/v1/words',
+    url: 'https://wordwatch-api.herokuapp.com/api/v1/words',
     data: word
   })
   .done(function(data){
