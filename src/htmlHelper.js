@@ -8,10 +8,16 @@ class HTMLHelper{
     let wordCount = {}
     let stringArray = newText.split(" ")
     let num = stringArray.length
-    let i; 
+    let i;
     stringArray.forEach(function(word){
-      console.log(word)
-    })
+      if(!wordCount[word]){
+        wordCount[word] = 1
+      }else if(wordCount[word]){
+        wordCount[word] += 1
+      }
+      wordCount
+    });
+    appendBreakDownText(wordCount)
   }
 }
 
