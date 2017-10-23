@@ -26,7 +26,7 @@ class WORDHelper{
 }
 
 function postWord(name){
-  var wordHash = {word: {value: name}};
+  let wordHash = {word: {value: name}};
   ajax.postWords(wordHash)
 }
 

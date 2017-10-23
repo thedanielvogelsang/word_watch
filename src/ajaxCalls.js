@@ -1,5 +1,6 @@
 const $ = require('jQuery')
 const Word = require('./word')
+const WORD = require('./wordHelper')
 
 function getMostWord(){
   $.ajax({

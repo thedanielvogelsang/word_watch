@@ -10345,8 +10345,7 @@ const $ = __webpack_require__(0)
 const ajax = __webpack_require__(3)
 
 class WORDHelper{
-  static appendMostWord(data){
-    let word = new Word(data.word);
+  static appendMostWord(word){
     $('.top-word h3').append(word.name + ` (${word.count})`)
   }
   static appendBreakDownText(newText){
@@ -10373,7 +10372,7 @@ class WORDHelper{
 }
 
 function postWord(name){
-  var wordHash = {word: {value: name}};
+  let wordHash = {word: {value: name}};
   ajax.postWords(wordHash)
 }
 
@@ -10393,7 +10392,10 @@ function getMostWord(){
     type: 'get',
     url: 'http://localhost:3000/api/v1/top_word'
   })
-  .done(WORD.appendMostWord)
+  .done(function(data){
+    let word = new Word(data.word);
+    return WORD.appendMostWord(word)
+  })
   .catch(function(err){
     console.log(err)
   })
