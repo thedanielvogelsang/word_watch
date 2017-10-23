@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 2);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -10341,31 +10341,68 @@ module.exports = Word
 /* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(3);
-module.exports = __webpack_require__(6);
+const $ = __webpack_require__(0)
+const Word = __webpack_require__(1)
+
+function getMostWord(){
+  $.ajax({
+    type: 'get',
+    url: 'http://localhost:3000/api/v1/top_word'
+  })
+  .done(function(data){
+    let word = new Word(data.word);
+    $('.top-word h3').append(word.name + ` (${word.count})`)
+  })
+  .catch(function(err){
+    console.log(err)
+  })
+}
+
+function postWords(word){
+  $.ajax({
+    type: 'post',
+    url: 'http://localhost:3000/api/v1/words',
+    data: word
+  })
+  .done(function(data){
+    console.log(data)
+  })
+  .catch(function(err){
+    console.log(err)
+  })
+}
+
+module.exports = {postWords, getMostWord}
 
 
 /***/ }),
 /* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
+__webpack_require__(4);
+module.exports = __webpack_require__(6);
+
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
 const $ = __webpack_require__(0)
 const Word = __webpack_require__(1)
-const WORDHelper = __webpack_require__(4)
+const WORDHelper = __webpack_require__(5)
+const ajax = __webpack_require__(2)
 
 document.addEventListener("DOMContentLoaded", () => {
   $(document).ready(function(){
-    $.ajax({
-      type: 'get',
-      url: 'http://localhost:3000/api/v1/top_word'
-    })
-    .done(function(data){
-      let word = new Word(data.word);
-      $('.top-word h3').append(word.name + ` (${word.count})`)
-    })
+    return ajax.getMostWord()
   })
   let buttonName = document.getElementsByTagName('button')[0]
   let newtext = document.getElementsByTagName('textarea')[0]
+  $('#button').keyup(function(event){
+    if(event.keyCode == 13){
+      $(buttonName).click();
+    }
+  });
   $(buttonName).on('click', function(e){
     e.preventDefault();
     newtext = newtext.value
@@ -10375,18 +10412,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 const $ = __webpack_require__(0)
-const ajax = __webpack_require__(5)
+const ajax = __webpack_require__(2)
 
 class WORDHelper{
   static appendBreakDownText(newText){
     let num = Object.keys(newText).length
     let textKeys = Object.keys(newText)
-    ajax.postWords(newText)
     for(let i = 0; i < num; i++){
+      postWord(textKeys[i])
       $('.word-count').append(`<p style='font-size:${newText[textKeys[i]]}em'>${textKeys[i]}</p>`)
     }
   }
@@ -10405,21 +10442,12 @@ class WORDHelper{
   }
 }
 
-module.exports = WORDHelper
-
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-const $ = __webpack_require__(0)
-const Word = __webpack_require__(1)
-
-function postWords(wordCount){
-  console.log('hello world')
+function postWord(name){
+  var wordHash = {word: {value: name}};
+  ajax.postWords(wordHash)
 }
 
-module.exports = postWords
+module.exports = WORDHelper
 
 
 /***/ }),
