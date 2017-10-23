@@ -5,8 +5,8 @@ class WORDHelper{
   static appendBreakDownText(newText){
     let num = Object.keys(newText).length
     let textKeys = Object.keys(newText)
-    ajax.postWords(newText)
     for(let i = 0; i < num; i++){
+      postWord()
       $('.word-count').append(`<p style='font-size:${newText[textKeys[i]]}em'>${textKeys[i]}</p>`)
     }
   }
@@ -25,4 +25,7 @@ class WORDHelper{
   }
 }
 
+function postWord(word, count){
+  ajax.postWords({'word' { word: count }})
+}
 module.exports = WORDHelper

@@ -15,8 +15,13 @@ function getMostWord(){
   })
 }
 
-function postWords(wordCount){
-  console.log('hello world')
+function postWords(word){
+  // $.ajax({
+  //   type: 'post',
+  //   url: 'http://localhost:3000/api/v1/words'
+  //   data: word
+  // })
+  // .done(function(data))
 }
 
 module.exports = {postWords, getMostWord}
