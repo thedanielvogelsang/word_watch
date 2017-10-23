@@ -68,7 +68,7 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
-module.exports = __webpack_require__(4);
+module.exports = __webpack_require__(5);
 
 
 /***/ }),
@@ -77,6 +77,7 @@ module.exports = __webpack_require__(4);
 
 const $ = __webpack_require__(2)
 const Word = __webpack_require__(3)
+const htmlHelper = __webpack_require__(4)
 
 document.addEventListener("DOMContentLoaded", () => {
   $(document).ready(function(){
@@ -85,9 +86,13 @@ document.addEventListener("DOMContentLoaded", () => {
       url: 'http://localhost:3000/api/v1/top_word'
     })
     .done(function(data){
-      word = new Word(data)
-      $('.top_word').append('<h3>')
+      let word = new Word(data.word);
+      $('.top-word h3').append(word.name + ` (${word.count})`)
     })
+  })
+  var buttonName = document.getElementsByTagName('button')[0]
+  $(buttonName).on('click', function(e){
+    appendBreakDownText(e)
   })
 })
 
@@ -10358,7 +10363,8 @@ return jQuery;
 
 class Word{
   constructor(wordJson){
-    console.log(wordJson)
+    this.name = Object.keys(wordJson)[0]
+    this.count = Object.values(wordJson)[0]
   };
 }
 
@@ -10367,12 +10373,18 @@ module.exports = Word
 
 /***/ }),
 /* 4 */
+/***/ (function(module, exports) {
+
+
+
+/***/ }),
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(5);
+var content = __webpack_require__(6);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -10380,7 +10392,7 @@ var transform;
 var options = {}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(7)(content, options);
+var update = __webpack_require__(8)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -10397,10 +10409,10 @@ if(false) {
 }
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(6)(undefined);
+exports = module.exports = __webpack_require__(7)(undefined);
 // imports
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,700);", ""]);
 
@@ -10411,7 +10423,7 @@ exports.push([module.i, "/* http://meyerweb.com/eric/tools/css/reset/ \n   v2.0 
 
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports) {
 
 /*
@@ -10493,7 +10505,7 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -10539,7 +10551,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(8);
+var	fixUrls = __webpack_require__(9);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -10852,7 +10864,7 @@ function updateLink (link, options, obj) {
 
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports) {
 
 

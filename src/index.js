@@ -1,5 +1,6 @@
 const $ = require('jQuery')
 const Word = require('./word.js')
+const HTMLHelper = require('./htmlHelper')
 
 document.addEventListener("DOMContentLoaded", () => {
   $(document).ready(function(){
@@ -9,7 +10,14 @@ document.addEventListener("DOMContentLoaded", () => {
     })
     .done(function(data){
       let word = new Word(data.word);
-      $('.top-word').append('<h3>' + word.name + ` (${word.count})</h3>`)
+      $('.top-word h3').append(word.name + ` (${word.count})`)
     })
+  })
+  let buttonName = document.getElementsByTagName('button')[0]
+  let newtext = document.getElementsByTagName('textarea')[0]
+  $(buttonName).on('click', function(e){
+    e.preventDefault();
+    newtext = newtext.value
+    HTMLHelper.breakDownText(newtext)
   })
 })
