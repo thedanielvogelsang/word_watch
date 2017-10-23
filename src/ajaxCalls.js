@@ -10,8 +10,8 @@ function getMostWord(){
     let word = new Word(data.word);
     $('.top-word h3').append(word.name + ` (${word.count})`)
   })
-  .catch(function(error){
-    console.log(error)
+  .catch(function(err){
+    console.log(err)
   })
 }
 
@@ -23,6 +23,9 @@ function postWords(word){
   })
   .done(function(data){
     console.log(data)
+  })
+  .catch(function(err){
+    console.log(err)
   })
 }
 

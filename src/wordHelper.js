@@ -29,4 +29,5 @@ function postWord(name){
   var wordHash = {word: {value: name}};
   ajax.postWords(wordHash)
 }
+
 module.exports = WORDHelper
