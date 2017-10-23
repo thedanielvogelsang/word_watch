@@ -1,6 +1,7 @@
 const $ = require('jQuery')
 const Word = require('./word.js')
-const HTMLHelper = require('./htmlHelper')
+const ajax = require('./ajaxCalls')
+const WORDHelper = require('./wordHelper')
 
 document.addEventListener("DOMContentLoaded", () => {
   $(document).ready(function(){
@@ -18,6 +19,6 @@ document.addEventListener("DOMContentLoaded", () => {
   $(buttonName).on('click', function(e){
     e.preventDefault();
     newtext = newtext.value
-    HTMLHelper.breakDownText(newtext)
+    WORDHelper.breakDownText(newtext)
   })
 })

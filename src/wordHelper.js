@@ -1,6 +1,7 @@
 const $ = require('jQuery')
+const ajax = require('./ajaxCalls')
 
-class HTMLHelper{
+class WORDHelper{
   static appendBreakDownText(newText){
     let num = Object.keys(newText).length
     let textKeys = Object.keys(newText)
@@ -23,4 +24,4 @@ class HTMLHelper{
   }
 }
 
-module.exports = HTMLHelper
+module.exports = WORDHelper

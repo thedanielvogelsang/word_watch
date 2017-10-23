@@ -60,45 +60,11 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__(1);
-module.exports = __webpack_require__(5);
-
-
-/***/ }),
-/* 1 */
-/***/ (function(module, exports, __webpack_require__) {
-
-const $ = __webpack_require__(2)
-const Word = __webpack_require__(3)
-const htmlHelper = __webpack_require__(4)
-
-document.addEventListener("DOMContentLoaded", () => {
-  $(document).ready(function(){
-    $.ajax({
-      type: 'get',
-      url: 'http://localhost:3000/api/v1/top_word'
-    })
-    .done(function(data){
-      let word = new Word(data.word);
-      $('.top-word h3').append(word.name + ` (${word.count})`)
-    })
-  })
-  var buttonName = document.getElementsByTagName('button')[0]
-  $(buttonName).on('click', function(e){
-    appendBreakDownText(e)
-  })
-})
-
-
-/***/ }),
-/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -10358,7 +10324,51 @@ return jQuery;
 
 
 /***/ }),
+/* 1 */
+/***/ (function(module, exports) {
+
+
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(3);
+module.exports = __webpack_require__(6);
+
+
+/***/ }),
 /* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+const $ = __webpack_require__(0)
+const Word = __webpack_require__(4)
+const ajax = __webpack_require__(1)
+const WORDHelper = __webpack_require__(5)
+
+document.addEventListener("DOMContentLoaded", () => {
+  $(document).ready(function(){
+    $.ajax({
+      type: 'get',
+      url: 'http://localhost:3000/api/v1/top_word'
+    })
+    .done(function(data){
+      let word = new Word(data.word);
+      $('.top-word h3').append(word.name + ` (${word.count})`)
+    })
+  })
+  let buttonName = document.getElementsByTagName('button')[0]
+  let newtext = document.getElementsByTagName('textarea')[0]
+  $(buttonName).on('click', function(e){
+    e.preventDefault();
+    newtext = newtext.value
+    WORDHelper.breakDownText(newtext)
+  })
+})
+
+
+/***/ }),
+/* 4 */
 /***/ (function(module, exports) {
 
 class Word{
@@ -10372,19 +10382,46 @@ module.exports = Word
 
 
 /***/ }),
-/* 4 */
-/***/ (function(module, exports) {
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
 
+const $ = __webpack_require__(0)
+const ajax = __webpack_require__(1)
+
+class WORDHelper{
+  static appendBreakDownText(newText){
+    let num = Object.keys(newText).length
+    let textKeys = Object.keys(newText)
+    for(let i = 0; i < num; i++){
+      $('.word-count').append(`<p style='font-size:${newText[textKeys[i]]}em'>${textKeys[i]}</p>`)
+    }
+  }
+  static breakDownText(newText){
+    let wordCount = {}
+    let stringArray = newText.split(" ")
+    stringArray.forEach(function(word){
+      if(!wordCount[word]){
+        wordCount[word] = 1
+      }else if(wordCount[word]){
+        wordCount[word] += 1
+      }
+      wordCount
+    });
+    this.appendBreakDownText(wordCount)
+  }
+}
+
+module.exports = WORDHelper
 
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(6);
+var content = __webpack_require__(7);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -10392,7 +10429,7 @@ var transform;
 var options = {}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(8)(content, options);
+var update = __webpack_require__(9)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -10409,10 +10446,10 @@ if(false) {
 }
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(7)(undefined);
+exports = module.exports = __webpack_require__(8)(undefined);
 // imports
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,700);", ""]);
 
@@ -10423,7 +10460,7 @@ exports.push([module.i, "/* http://meyerweb.com/eric/tools/css/reset/ \n   v2.0 
 
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports) {
 
 /*
@@ -10505,7 +10542,7 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -10551,7 +10588,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(9);
+var	fixUrls = __webpack_require__(10);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -10864,7 +10901,7 @@ function updateLink (link, options, obj) {
 
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports) {
 
 
