@@ -6,7 +6,7 @@ class WORDHelper{
     let num = Object.keys(newText).length
     let textKeys = Object.keys(newText)
     for(let i = 0; i < num; i++){
-      postWord()
+      postWord(textKeys[i])
       $('.word-count').append(`<p style='font-size:${newText[textKeys[i]]}em'>${textKeys[i]}</p>`)
     }
   }
@@ -25,7 +25,8 @@ class WORDHelper{
   }
 }
 
-function postWord(word, count){
-  ajax.postWords({'word' { word: count }})
+function postWord(name){
+  var wordHash = {word: {value: name}};
+  ajax.postWords(wordHash)
 }
 module.exports = WORDHelper

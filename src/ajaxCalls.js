@@ -16,12 +16,14 @@ function getMostWord(){
 }
 
 function postWords(word){
-  // $.ajax({
-  //   type: 'post',
-  //   url: 'http://localhost:3000/api/v1/words'
-  //   data: word
-  // })
-  // .done(function(data))
+  $.ajax({
+    type: 'post',
+    url: 'http://localhost:3000/api/v1/words',
+    data: word
+  })
+  .done(function(data){
+    console.log(data)
+  })
 }
 
 module.exports = {postWords, getMostWord}
