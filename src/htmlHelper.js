@@ -2,13 +2,15 @@ const $ = require('jQuery')
 
 class HTMLHelper{
   static appendBreakDownText(newText){
-    $('.word-count').append(`<p>${newText}</p>`)
+    let num = Object.keys(newText).length
+    let textKeys = Object.keys(newText)
+    for(let i = 0; i < num; i++){
+      $('.word-count').append(`<p style='font-size:${newText[textKeys[i]]}em'>${textKeys[i]}</p>`)
+    }
   }
   static breakDownText(newText){
     let wordCount = {}
     let stringArray = newText.split(" ")
-    let num = stringArray.length
-    let i;
     stringArray.forEach(function(word){
       if(!wordCount[word]){
         wordCount[word] = 1
@@ -17,7 +19,7 @@ class HTMLHelper{
       }
       wordCount
     });
-    appendBreakDownText(wordCount)
+    this.appendBreakDownText(wordCount)
   }
 }
 
